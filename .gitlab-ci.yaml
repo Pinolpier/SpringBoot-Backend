@@ -29,10 +29,10 @@ deploy_staging:
     - apk upgrade && apk update
     - apk add openssh-client
     - apk add sshpass
-    - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-    - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker pull registry.gitlab.com/mathflake/api
-    - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER "docker container stop mathflake_api && docker container rm mathflake_api || true"
-    - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker run --net=host --name mathflake_api -p 80:80 -d registry.gitlab.com/mathflake/api
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker pull registry.gitlab.com/mathflake/api
+    - docker container stop mathflake_api && docker container rm mathflake_api || true
+    - docker run --net=host --name mathflake_api -p 80:80 -d registry.gitlab.com/mathflake/api
   environment:
     name: staging
     url: https://mathflake.com
