@@ -38,4 +38,3 @@ deploy_staging:
     url: https://mathflake.com
   only:
     - master
-    -
