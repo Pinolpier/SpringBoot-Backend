@@ -12,7 +12,7 @@ build:
   stage: build
   script:
     - gradle build
-  artificats:
+  artifacts:
     paths:
       - build/libs/*.jar
 
