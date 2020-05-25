@@ -34,7 +34,8 @@ dependencies {
 	compile group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
 	// https://mvnrepository.com/artifact/org.hibernate/hibernate-gradle-plugin
 	compile group: 'org.hibernate', name: 'hibernate-gradle-plugin', version: '5.4.11.Final'
-
+	// https://mvnrepository.com/artifact/org.springframework/spring-aspects
+	compile group: 'org.springframework', name: 'spring-aspects', version: '5.2.6.RELEASE'
 }
 
 test {
