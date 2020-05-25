@@ -19,11 +19,8 @@ build:
 deploy_staging:
   stage: deploy
   script:
-    - docker build -t ccrest
+    - docker build -t ccrest config.dockerfile
     - docker container stop ccrest || true
     - docker run --net=host --name ccrest -d ccrest
-  environment:
-    name: staging
-    url: https://mathflake.com
   only:
     - master
