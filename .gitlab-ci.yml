@@ -11,6 +11,7 @@ build:
   image: gradle:5.0-jdk8-alpine
   stage: build
   script:
+    - whoami
     - gradle build --info
   artifacts:
     paths:
