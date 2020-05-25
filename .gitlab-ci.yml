@@ -21,7 +21,7 @@ deploy_staging:
   script:
     - ls
     - pwd
-    - docker build -t ccrest -f config.dockerfile
+    - docker build -t ccrest -f config.dockerfile .
     - docker container stop ccrest || true
     - docker run --net=host --name ccrest -d ccrest
   only:
