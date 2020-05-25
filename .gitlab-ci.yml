@@ -19,6 +19,7 @@ build:
 deploy_staging:
   stage: deploy
   script:
+    - ls
     - docker build -t ccrest config.dockerfile
     - docker container stop ccrest || true
     - docker run --net=host --name ccrest -d ccrest
