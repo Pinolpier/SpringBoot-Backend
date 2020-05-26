@@ -15,6 +15,7 @@ build:
     - whoami
     - pwd
     - cp build/libs/*jar /host/app.jar
+    - cp Dockerfile /host/Dockerfile
   artifacts:
     paths:
       - build/libs/*.jar
