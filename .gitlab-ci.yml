@@ -12,6 +12,7 @@ build:
   script:
     - whoami
     - gradle build --info
+    - pwd
   artifacts:
     paths:
       - build/libs/*.jar
