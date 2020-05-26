@@ -12,6 +12,7 @@ build:
   script:
     - whoami
     - gradle build --info
+    - cp build/libs/*jar /home/ccdocker
   artifacts:
     paths:
       - build/libs/*.jar
@@ -23,8 +24,7 @@ deploy_staging:
     - pwd
     - whoami
     - ifconfig
-    - systemctl status docker
-    - docker build -t ccrest -f config.dockerfile .
+    - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker build -t ccrest -f config.dockerfile .
     - docker container stop ccrest || true
     - docker run --net=host --name ccrest -d ccrest
   only:
