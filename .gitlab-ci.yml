@@ -29,6 +29,7 @@ deploy_staging:
     - pwd
     - whoami
     - ifconfig
-    - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER pwd
+    - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker build -t ccrest -f config.dockerfile .
+    - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker run --net=host --name ccrest -d ccrest
   only:
     - master
