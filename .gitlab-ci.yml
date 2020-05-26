@@ -14,7 +14,7 @@ build:
     - gradle build --info
     - whoami
     - pwd
-    - cp build/libs/*jar /host
+    - cp build/libs/*jar /host/app.jar
   artifacts:
     paths:
       - build/libs/*.jar
