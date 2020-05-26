@@ -33,5 +33,6 @@ deploy_staging:
     - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker build -t ccrest .
     - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker container stop ccrest && docker container rm ccrest || true
     - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker run -p 8080:8080 --name ccrest -d ccrest
+    - sshpass -p "$STAGING_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $STAGING_SERVER_USER@$STAGING_SERVER docker container prune
   only:
     - master
