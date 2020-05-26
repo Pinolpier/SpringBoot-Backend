@@ -22,6 +22,9 @@ build:
 deploy_staging:
   stage: deploy
   script:
+    - apk upgrade && apk update
+    - apk add openssh-client
+    - apk add sshpass
     - ls
     - pwd
     - whoami
