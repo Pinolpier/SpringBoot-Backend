@@ -12,8 +12,6 @@ build:
   script:
     - whoami
     - gradle build --info
-    - whoami
-    - cp build/libs/*jar /home/ccdocker
   artifacts:
     paths:
       - build/libs/*.jar
