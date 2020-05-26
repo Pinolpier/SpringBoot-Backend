@@ -12,7 +12,9 @@ build:
   script:
     - whoami
     - gradle build --info
+    - whoami
     - pwd
+    - cp build/libs/*jar /host
   artifacts:
     paths:
       - build/libs/*.jar
