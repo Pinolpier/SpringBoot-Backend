@@ -25,6 +25,7 @@ public class QuestionController {
 
     @PostMapping("/questions")
     public Question createQuestion(@Valid @RequestBody Question question) {
+        question.setDescription(question.getDescription() + " Wow, immer hinten an der Description?");
         return questionRepository.save(question);
     }
 
