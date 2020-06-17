@@ -51,7 +51,6 @@ public class Product implements Serializable {
     private String type;
 
     @ManyToOne(optional = false)
-    @NotNull
     @JoinColumn(nullable = false)
     @Getter
     @Setter
