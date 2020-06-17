@@ -18,6 +18,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods
     List<Product> findByMerchantId(Long merchantId);
 
-    @Query("SELECT p FROM Product p WHERE (:merchantId is null or p.merchant = :merchantId) and (:type is null or p.type = :type) and (:name is null or p.name = :name)")
+    @Query("SELECT p FROM Product p WHERE (:merchantId is null or p.merchant.id = :merchantId) and (:type is null or p.type = :type) and (:name is null or p.name = :name)")
     List<Product> findProductsByFilter(@Param("merchantId") Long merchantId, @Param("type") String type, @Param("name") String name);
 }
