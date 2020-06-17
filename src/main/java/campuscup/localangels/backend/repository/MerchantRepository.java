@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface MerchantRepository extends JpaRepository<Merchant, Long> {
-    @Query("SELECT m FROM merchant m WHERE m.email = ?1")
+    @Query("SELECT m FROM Merchant m WHERE m.email = ?1")
     List<Merchant> findMerchantByEmail(String email);
 }
