@@ -54,7 +54,7 @@ public class AuthController {
 
     public boolean checkCredentialsUser(User user) {
         try {
-            User dbUser = userRepository.findUserByEmail(user.getEmail());
+            User dbUser = userRepository.findUserByEmail(user.getEmail()).get(0);
             if (dbUser.getPassword().equals(hashPasswordUser(user).getPassword())) {
                 return true;
             }
@@ -68,7 +68,7 @@ public class AuthController {
 
     public boolean checkCredentialsMerchant(Merchant merchant) {
         try {
-            Merchant dbMerchant = merchantRepository.findMerchantByEmail(merchant.getEmail());
+            Merchant dbMerchant = merchantRepository.findMerchantByEmail(merchant.getEmail()).get(0);
             if (dbMerchant.getPassword().equals(hashPasswordMerchant(merchant).getPassword())) {
                 return true;
             }
