@@ -21,6 +21,7 @@ public abstract class AccountModel implements Serializable {
     @Size(min = 6)
     @Email
     @Column(unique = true)
+    //TODO unique constraint!
     private String email;
 
     @Getter

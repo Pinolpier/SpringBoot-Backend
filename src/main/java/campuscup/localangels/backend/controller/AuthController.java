@@ -22,6 +22,7 @@ public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
     private MerchantRepository merchantRepository;
 
     @GetMapping("/user/login")
