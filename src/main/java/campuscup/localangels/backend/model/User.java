@@ -2,22 +2,12 @@ package campuscup.localangels.backend.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 
-@MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table(name = "user")
-public class User implements Serializable {
-    @Getter
-    @Setter
-    @NotBlank
-    private String email, password;
-
+public class User extends AccountModel {
     @Getter
     @Setter
     @Id

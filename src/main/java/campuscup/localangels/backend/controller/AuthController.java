@@ -23,8 +23,17 @@ public class AuthController {
     private MerchantRepository merchantRepository;
 
     @GetMapping("/user/login")
-    public ResponseEntity<Boolean> login(@Valid @RequestBody User user) {
-        if (checkCredentials(user)) {
+    public ResponseEntity<Boolean> loginUser(@Valid @RequestBody User user) {
+        if (checkCredentialsUser(user)) {
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Boolean>(false, HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @GetMapping("/merchant/login")
+    public ResponseEntity<Boolean> loginMerchant(@Valid @RequestBody Merchant merchant) {
+        if (checkCredentialsMerchant(merchant)) {
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } else {
             return new ResponseEntity<Boolean>(false, HttpStatus.UNAUTHORIZED);
@@ -32,22 +41,21 @@ public class AuthController {
     }
 
     @PostMapping("/user/register")
-    public ResponseEntity<Boolean> register(@Valid @RequestBody User user) {
-        userRepository.save(user);
+    public ResponseEntity<Boolean> registerUser(@Valid @RequestBody User user) {
+        userRepository.save(hashPasswordUser(user));
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 
-    @PostMapping("/user/register/merchant")
+    @PostMapping("/merchant/register")
     public ResponseEntity<Boolean> registerMerchant(@Valid @RequestBody Merchant merchant) {
-        merchantRepository.save(merchant);
+        merchantRepository.save(hashPasswordMerchant(merchant));
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 
-    public boolean checkCredentials(User user) {
+    public boolean checkCredentialsUser(User user) {
         try {
-
             User dbUser = userRepository.findUserByEmail(user.getEmail());
-            if (dbUser.getPassword().equals(user.getPassword())) {
+            if (dbUser.getPassword().equals(hashPasswordUser(user).getPassword())) {
                 return true;
             }
         } catch (Exception e) {
@@ -58,13 +66,36 @@ public class AuthController {
         return false;
     }
 
-    private User hashPassword(User user) {
+    public boolean checkCredentialsMerchant(Merchant merchant) {
+        try {
+            User dbUser = merchantRepository.findMerchantByEmail(merchant.getEmail());
+            if (dbUser.getPassword().equals(hashPasswordMerchant(merchant).getPassword())) {
+                return true;
+            }
+        } catch (Exception e) {
+            //TODO handle error!
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+
+    private User hashPasswordUser(User user) {
         try {
             user.setPassword(bytesToHex(MessageDigest.getInstance("SHA-256").digest(user.getPassword().getBytes(StandardCharsets.UTF_8))));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         return user;
+    }
+
+    private Merchant hashPasswordMerchant(Merchant merchant) {
+        try {
+            merchant.setPassword(bytesToHex(MessageDigest.getInstance("SHA-256").digest(merchant.getPassword().getBytes(StandardCharsets.UTF_8))));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return merchant;
     }
 
     private static String bytesToHex(byte[] hash) {
