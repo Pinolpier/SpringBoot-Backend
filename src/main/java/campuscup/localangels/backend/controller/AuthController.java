@@ -68,8 +68,8 @@ public class AuthController {
 
     public boolean checkCredentialsMerchant(Merchant merchant) {
         try {
-            User dbUser = merchantRepository.findMerchantByEmail(merchant.getEmail());
-            if (dbUser.getPassword().equals(hashPasswordMerchant(merchant).getPassword())) {
+            Merchant dbMerchant = merchantRepository.findMerchantByEmail(merchant.getEmail());
+            if (dbMerchant.getPassword().equals(hashPasswordMerchant(merchant).getPassword())) {
                 return true;
             }
         } catch (Exception e) {
