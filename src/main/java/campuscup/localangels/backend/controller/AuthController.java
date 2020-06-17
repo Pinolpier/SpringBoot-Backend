@@ -41,15 +41,13 @@ public class AuthController {
     }
 
     @PostMapping("/user/register")
-    public ResponseEntity<Boolean> registerUser(@Valid @RequestBody User user) {
-        userRepository.save(hashPasswordUser(user));
-        return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+    public User createUser(@Valid @RequestBody User user) {
+        return userRepository.save(hashPasswordUser(user));
     }
 
     @PostMapping("/merchant/register")
-    public ResponseEntity<Boolean> registerMerchant(@Valid @RequestBody Merchant merchant) {
-        merchantRepository.save(hashPasswordMerchant(merchant));
-        return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+    public Merchant createMerchant(@Valid @RequestBody Merchant merchant) {
+        return merchantRepository.save(hashPasswordMerchant(merchant));
     }
 
     public boolean checkCredentialsUser(User user) {
