@@ -11,7 +11,7 @@ build:
   stage: build
   script:
     - whoami
-    - gradle build --info
+    - gradle build
     - whoami
     - pwd
     - cp build/libs/*jar /host/app.jar
